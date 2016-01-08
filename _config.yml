@@ -1,0 +1,34 @@
+# Site settings
+title: jeKit
+email: your-email@domain.com
+description: A starter kit for Jekyll
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "" # the base hostname & protocol for your site
+#twitter_username: jekyllrb
+#github_username:  jekyll
+highlighter: pygments
+exclude:
+    - node_modules
+
+# Build settings
+markdown:         kramdown
+# Permalinks
+permalink:        :categories/:title.html
+
+# Server
+source:           src
+destination:      build
+host:             localhost
+port:             9002
+#url:              http://
+encoding:         UTF-8
+
+# Custom Vars
+version:  1.0.0
+name: /
+
+# Sass conversion configs
+#sass:
+#    sass_dir: assets/scss
+#    style: :compressed
+
