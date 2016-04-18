@@ -1,5 +1,4 @@
-'use strict';
+import { smoothScroll } from './scroll';
 
-(function() {
+smoothScroll();
 
-}());

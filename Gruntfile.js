@@ -34,20 +34,28 @@ module.exports = function(grunt) {
 		},
 
 		concat: {
+			options: {
+				separator: ';\n', // Avoid syntax error on Smart-Table concat
+			},
 			main: {
-				src: ['<%= vendorPath %>/jquery/dist/jquery.js',
-				'<%= vendorPath %>/bootstrap-sass/assets/javascripts/bootstrap.js',
+				src: ['<%= vendorsPath %>/jquery/dist/jquery.js',
+				'<%= vendorsPath %>/bootstrap-sass/assets/javascripts/bootstrap.js',
 				'<%= buildAssets %>/js/main-babelified.js'],
-				dest: '<%= buildAssets %>/js/<%= pkg.name %>-<%= pkg.version %>.js'
+				dest: '<%= buildAssets %>/js/<%= pkg.name %>-<%= pkg.version %>.js',
+				nonull: true,
 			},
 			ieSupport: {
-				src: ['<%= vendorPath %>/html5shiv/dist/html5shiv.js',
-				'<%= vendorPath %>/respond/dest/respond.js'],
-				dest: '<%= buildAssets %>/js/<%= pkg.name %>-<%= pkg.version %>-ie-support.js'
+				src: ['<%= vendorsPath %>/html5shiv/dist/html5shiv.js',
+				'<%= vendorsPath %>/respond/dest/respond.src.js'],
+				dest: '<%= buildAssets %>/js/<%= pkg.name %>-<%= pkg.version %>-ie-support.js',
+				nonull: true,
 			}
 		},
 
 		uglify : {
+			options: {
+				mangle: false
+			},
 			js: {
 				files: {
 					'<%= buildAssets %>/js/<%= pkg.name %>-<%= pkg.version %>.min.js' : [ '<%= buildAssets %>/js/<%= pkg.name %>-<%= pkg.version %>.js' ],
@@ -71,7 +79,7 @@ module.exports = function(grunt) {
 					flatten: true
 				},
 				files: {
-					'<%= srcAssets %>/css/main.css' : ['<%= srcAssets %>/css/main.css'],
+					'<%= buildAssets %>/css/main.css' : ['<%= buildAssets %>/css/main.css'],
 				}
 			}
 		},
@@ -119,7 +127,7 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true,
 					cwd: '<%= srcAssets %>/im/',
-					src: ['**/*.{png,jpg,gif}'],
+					src: ['**/*.{png,jpg,gif,svg}'],
 					dest: '<%= buildAssets %>/im/'
 				}]
 			}
@@ -165,25 +173,25 @@ module.exports = function(grunt) {
 			},
 			gruntfile: {
 				files: 'Gruntfile.js',
-				tasks: [ 'eslint' ],
+				tasks: [ 'eslint', 'browserify', 'concat', 'sass', 'postcss', 'csso', 'jekyll', 'clean'],
 				options: {
 					livereload: false
 				}
 			},
 			sass: {
-				files: '<%= srcAssets %>/scss/main.scss',
-				tasks: ['sass', 'postcss', 'csso', 'clean', 'csscount', 'jekyll'],
+				files: ['<%= srcAssets %>/scss/*.scss', '<%= srcAssets %>/scss/*/*.scss'],
+				tasks: ['sass', 'postcss', 'csso', 'jekyll', 'clean', 'csscount'],
 			},
 			script: {
-				files: '<%= srcAssets %>/js/main.js',
-				tasks: ['eslint', 'browserify', 'concat', 'uglify', 'clean', 'jekyll']
+				files: '<%= srcAssets %>/js/*.js',
+				tasks: ['eslint', 'browserify', 'concat', 'uglify', 'jekyll', 'clean']
 			},
 			html: {
 				files: ['<%= pkg.src %>/*.html', '<%= pkg.src %>/*/*.html', '<%= pkg.src %>/*/*/*.html'],
-				tasks: ['sass', 'postcss', 'clean', 'jekyll']
+				tasks: ['sass', 'postcss', 'csso', 'jekyll', 'clean']
 			},
 			images: {
-				files: ['<%= srcAssets %>/im/**/*.{png,jpg,gif}'],
+				files: ['<%= srcAssets %>/im/**/*.{png,jpg,gif,svg}'],
 				tasks: ['imagemin']
 			},
 			fonts: {
@@ -234,7 +242,7 @@ module.exports = function(grunt) {
 		concurrent: {
 			transform: ['browserify', 'sass'],
 			minify: ['csso', 'uglify'],
-			optim: ['imagemin', 'criticalcss']
+			optim: ['imagemin']
 		},
 
 		clean: {
@@ -261,11 +269,10 @@ grunt.registerTask('default', [
 	'csscount',
 	'concat',
 	'concurrent:minify',
-	'clean',
+	'copy',
 	'jekyll',
 	'connect:localhost',
-	'copy',
-	'delta'
+	'delta',
 	]);
 grunt.registerTask('prod', [
 	'eslint',
@@ -276,8 +283,8 @@ grunt.registerTask('prod', [
 	'concurrent:optim',
 	'concurrent:minify',
 	'copy',
-	'clean',
 	'jekyll',
+	'clean'
 	]);
 
 };
