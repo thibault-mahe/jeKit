@@ -8,6 +8,12 @@
 	"globals": {
 	},
 	"extends": "eslint:recommended",
+	"parserOptions": {
+		"sourceType": "module",
+        "ecmaFeatures": {
+            "modules": true,
+        }
+    },
 	"rules": {
 		"comma-dangle": [2, "always-multiline"],
 		"no-unexpected-multiline": 2,
@@ -32,7 +38,7 @@
 		"no-iterator": 2,
 		"no-labels": 2,
 		"no-lone-blocks": 2,
-		"no-loop-func": 2,
+		"no-loop-func": 1,
 		"no-multi-spaces": 2,
 		"no-multi-str": 2,
 		"no-native-reassign": 2,
@@ -65,13 +71,13 @@
 		"no-shadow-restricted-names": 2,
 		"no-shadow": 2,
 		"no-undef-init": 2,
-		"no-undefined": 2,
+		"no-undefined": 1,
 		"no-use-before-define": 1,
 
 		"array-bracket-spacing": [2, "never"],
 		"block-spacing": [2, "always"],
 		"brace-style": [2, "stroustrup"],
-		"camelcase": [2, {"properties": "always"}],
+		"camelcase": [1, {"properties": "always"}],
 		"comma-spacing": [2, {"before": false, "after": true}],
 		"comma-style": [2, "last"],
 		"computed-property-spacing": [2, "never"],
