@@ -1,0 +1,18 @@
+// Container mixin
+// Add container properties to an element
+// -------------------------
+
+
+@mixin container($gutter: $grid-gutter-width) {
+	@include container-fixed($gutter);
+
+	@media (min-width: $screen-sm-min) {
+		width: $container-sm;
+	}
+	@media (min-width: $screen-md-min) {
+		width: $container-md;
+	}
+	@media (min-width: $screen-lg-min) {
+		width: $container-lg;
+	}
+}

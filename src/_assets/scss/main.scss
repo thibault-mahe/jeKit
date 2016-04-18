@@ -2,20 +2,26 @@
 // -------------------------
 
 // Import Assets and Variables
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,900);
 @import "colors";
 @import "custom-variables";
 @import "override-variables";
-@import "vendor/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
-@import "vendor/font-awesome/scss/font-awesome.scss";
+@import "bootstrap-custom";
+@import "fonts";
 
 // Import Utilities
 @import "reset";
-@import "mixins";
+@import "mixins/mixins";
 
 // Import Components
-@import "header";
-@import "footer";
+@import "components/header";
+@import "components/footer";
+@import "components/typography";
+@import "components/buttons";
+@import "components/forms";
+
+//Views
+//Note that every view doesn't need a specific file
+//@import "views/";
 
 // Shame
 @import "shame";
@@ -30,4 +36,8 @@ a {
 
 section {
 	@include container-fixed();
+}
+
+.container {
+	max-width: 100%;
 }
