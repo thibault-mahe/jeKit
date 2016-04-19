@@ -6,6 +6,7 @@
   ],
   "description": "",
   "license": "MIT",
+  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
@@ -15,8 +16,9 @@
   ],
   "dependencies": {
     "bootstrap-sass": "~3.3.3",
-    "jquery": "~2.1.4",
     "html5shiv": "~3.7.3",
+    "jquery": "~2.1.4",
+    "loadCSS": "https://github.com/filamentgroup/loadCSS/",
     "respond": "~1.4.2"
   }
 }
