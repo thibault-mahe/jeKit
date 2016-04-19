@@ -24,11 +24,12 @@ Inspired by [the GestionAir StarterKit : https://github.com/GestionAIR/StarterKi
 
 This project requires [Grunt](http://gruntjs.com/) and [Bower](http://bower.io/).
 
-First clone the repo : `git clone git@github.com:tibomahe/jeKit`
+First download the starterkit ZIP file and extract it.
 
 From the project's directory execute :
 
 ```
+$ git init
 $ npm -g install grunt-cli bower
 $ npm install
 $ bower install
