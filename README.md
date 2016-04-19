@@ -9,7 +9,6 @@ A starter kit for front developpement based on bootstrap, SASS and jekyll.
 - **Bootstrap 3**
 - **ES6 support**
 - **SASS**
-- **Font Awesome**
 - **Respond.JS**
 - **html5shiv**
 - **Grunt**
