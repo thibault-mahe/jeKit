@@ -8,4 +8,5 @@
 node_modules/*
 vendor/*
 build/*
+src/assets/*
 .jekyll-metadata
